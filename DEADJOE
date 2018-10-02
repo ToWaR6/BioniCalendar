@@ -1,0 +1,23 @@
+
+*** These modified files were found in JOE when it aborted on Tue Oct  2 11:34:39 2018
+*** JOE was aborted because the terminal closed
+
+*** Fichier '/auto_home/lcrauser/Documents/m2/BioniCalendar/.git/MERGE_MSG'
+
+merge
+
+Merge branch 'master' of https://github.com/ToWaR6/BioniCalendar
+
+# Veuillez entrer un message de validation pour expliquer en quoi cette fusion est
+# nécessaire, surtout si cela fusionne une branche amont mise à jour dans une branche de sujet.
+#
+# Les lignes commençant par '#' seront ignorées, et un message vide# abandonne la validation.
+
+*** Fichier '(Sans nom)'
+/auto_home/lcrauser/Documents/M1/Reseau/ClepTorrent/.git/MERGE_MSG
+/auto_home/lcrauser/Documents/M1/Reseau/ClepTorrent/.git/MERGE_MSG
+/auto_home/lcrauser/Documents/m2/BioniCalendar/.git/MERGE_MSG
+
+*** Fichier '* Startup Log *'
+Traitement de '/etc/joe/editorrc'...Traitement de '/etc/joe/ftyperc'...Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
