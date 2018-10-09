@@ -15,4 +15,31 @@
 
 <ion-content padding>
 
+<ion-item>
+    <ion-label>Titre</ion-label>
+    <ion-input type="text"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label>Start Time</ion-label>
+  <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="D/M/YYYY" min="2018" max="2050-10-31"></ion-datetime>
+</ion-item>
+
+<ion-item>
+  <ion-label>Type</ion-label>
+  <ion-select >
+    <ion-option value="birthday">Anniversaire</ion-option>
+    <ion-option value="sport">Sport</ion-option>
+    <ion-option value="rdv">Rendez-vous</ion-option>
+    <ion-option value="sante">Santé</ion-option>
+    <ion-option value="autre">Autres</ion-option>
+  </ion-select>
+</ion-item>
+
+
+<ion-item>
+    <ion-textarea type="text" placeholder="Note"></ion-textarea>
+</ion-item>
+
+
 </ion-content>
