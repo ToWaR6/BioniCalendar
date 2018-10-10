@@ -7,6 +7,7 @@ import { NotificationsPage } from '../pages/notifications/notifications';
 import { AddeventPage } from '../pages/addevent/addevent';
 import { SearchPage } from '../pages/search/search';
 import { TabsPage } from '../pages/tabs/tabs';
+import { EventDetailsPage } from '../pages/search/search';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,7 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NotificationsPage,
     AddeventPage,
     SearchPage,
-    TabsPage
+    TabsPage,
+    EventDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NotificationsPage,
     AddeventPage,
     SearchPage,
-    TabsPage
+    TabsPage,
+    EventDetailsPage
   ],
   providers: [
     StatusBar,

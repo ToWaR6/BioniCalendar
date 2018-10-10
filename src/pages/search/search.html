@@ -32,9 +32,16 @@
   </ion-select>
 </ion-item>
 
-<button ion-button round>Rechercher</button>
 
-<ion-list>
+
+<button ion-button block>Rechercher</button>
+
+
+ <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="openNavDetailsPage(item)" icon-start>
+      {{ item.title }}
+    </button>
 </ion-list>
 
 </ion-content>
+
