@@ -1,3 +1,4 @@
+import { DatabaseProvider } from './../../providers/database/database';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddeventPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  title: String = "";
+  description: String = "";
+  date: Date = null;
+  type: String = "";
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private database: DatabaseProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddeventPage');
+  }
+
+  addEvent() {
+    this.database.addEvent(this.title, this.description, this.date, this.type, false);
   }
 
 }

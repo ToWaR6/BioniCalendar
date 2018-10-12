@@ -1,0 +1,15 @@
+#Common Ignores
+.sourcemaps/
+.vscode/
+.DS_Store
+
+#Ionic
+node_modules/
+plugins/
+
+#Platform
+platforms/
+
+#Others
+www/
+typings/
