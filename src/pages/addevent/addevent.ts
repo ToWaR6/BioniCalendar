@@ -1,6 +1,7 @@
 import { DatabaseProvider } from './../../providers/database/database';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the AddeventPage page.
@@ -21,7 +22,7 @@ export class AddeventPage {
   date: Date = null;
   type: String = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private database: DatabaseProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private database: DatabaseProvider, private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -29,7 +30,32 @@ export class AddeventPage {
   }
 
   addEvent() {
-    this.database.addEvent(this.title, this.description, this.date, this.type, false);
+    this.database.addEvent(this.title, this.description, this.date, this.type, false)
+      .then(() => {
+        this.presentToast("Evenement ajouté");
+        this.clearForm();
+      });
+  }
+
+  clearForm() {
+    this.title = "";
+    this.description = "";
+    this.date = null;
+    this.type = "";
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'top'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
 }

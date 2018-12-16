@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DatabaseProvider } from './../../providers/database/database';
 
 
 @Component({
@@ -22,34 +23,7 @@ export class SearchPage {
 	items = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.items = [
-      {
-        'title': 'Commencer le sport',
-        'note': 'on y crois',
-        'type': 'sport',
-        'date': '01/01'
-	  	},
-	  	{
-        'title': 'Vraiment commencer le sport',
-        'note': 'on y crois moins',
-        'type': 'sport',
-        'date': '01/02'
-	  	},
-	  	{
-        'title': 'Nan sérieux... bouge ton cul',
-        'note': 'on y crois plus',
-        'type': 'sport',
-        'date': '01/03'
-	  	},
-	  	{
-        'title': 'RDV pour coloscopie',
-        'note': 'c\'est pas pour ta sante mais pour le plaisir, on le sait --\'',
-        'type': 'sante',
-        'date': '05/06'
-	 	 	}
-		]
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private database: DatabaseProvider) {
   }
 
   openNavDetailsPage(item) {
@@ -58,6 +32,15 @@ export class SearchPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
+  }
+
+  searchEvent() {
+    this.database.getAllEvent().then((data: any) => {
+      console.log(data);
+      this.items = data;
+    }, (error) => {
+      console.log(error);
+    })
   }
 
 }

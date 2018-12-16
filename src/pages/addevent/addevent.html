@@ -17,23 +17,23 @@
   <form (ngSubmit)="addEvent()">
     <ion-item>
         <ion-label floating>Titre</ion-label>
-        <ion-input type="text" [(ngModel)]="title" name="title"></ion-input>
+        <ion-input type="text" [(ngModel)]="title" name="title" required></ion-input>
       </ion-item>
 
     <ion-item>
       <ion-label>Start Time</ion-label>
-      <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="D/M/YYYY" min="2018" max="2050-10-31" [(ngModel)]="date" name="date"></ion-datetime>
+      <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="D/M/YYYY" min="2018" max="2050-10-31" [(ngModel)]="date" name="date" required></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label>Type</ion-label>
-      <ion-select [(ngModel)]="type" name="type">
-        <ion-option value="birthday">Anniversaire</ion-option>
-        <ion-option value="sport">Sport</ion-option>
-        <ion-option value="meeting">Rendez-vous</ion-option>
-        <ion-option value="health">Santé</ion-option>
-        <ion-option value="other">Autres</ion-option>
-        <ion-option value="nothing">Aucun</ion-option>
+      <ion-select [(ngModel)]="type" name="type" required>
+        <ion-option value="Anniversaire">Anniversaire</ion-option>
+        <ion-option value="Sport">Sport</ion-option>
+        <ion-option value="Rendez-vous">Rendez-vous</ion-option>
+        <ion-option value="Santé">Santé</ion-option>
+        <ion-option value="Autres">Autres</ion-option>
+        <ion-option value="Aucun">Aucun</ion-option>
       </ion-select>
     </ion-item>
 
