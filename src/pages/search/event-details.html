@@ -10,10 +10,12 @@
   <ion-list>
       <ion-item> <ion-label> Date : {{ item.date | date: "EEEE d MMMM yyyy" }} </ion-label> </ion-item>
       <ion-item> <ion-label> Type : {{ item.type }} </ion-label> </ion-item>
-      <ion-item>
+      <ion-item *ngIf="item.description != ''">
         <ion-label> Description </ion-label>
         <ion-label autosize> {{ item.description }} </ion-label>
       </ion-item>
+      <ion-item> <p align="center"><img src="{{item.picture}}"></p> </ion-item>
+
   </ion-list>
 
   <button ion-button round outline icon-end color="danger" position="bottom" (click)="deleteEvent(this.item.id)">

@@ -12,7 +12,6 @@ export class EventDetailsPage {
   constructor(public navCtrl: NavController, public params: NavParams, public database: DatabaseProvider) {
     this.item = params.data.item;
     this.item.date = new Date(this.item.date);
-    console.log(this.item.description);
   }
 
   deleteEvent(id: String) {

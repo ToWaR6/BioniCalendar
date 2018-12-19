@@ -36,9 +36,11 @@
         <ion-option value="Aucun">Aucun</ion-option>
       </ion-select>
     </ion-item>
-
     <ion-item>
         <ion-textarea type="text" id="description" placeholder="Description" [(ngModel)]="description" name="description"></ion-textarea>
+    </ion-item>
+    <ion-item> <button ion-button type="button" position="center" (click)="presentActionSheet()" icon-end>Ajouter une photo<ion-icon name="camera"></ion-icon></button>
+    <p align="center"><img src="{{picture}}"></p>
     </ion-item>
     <div *ngIf="type && date && title">
       <button ion-button type="submit" block>Ajouter Evenement</button>

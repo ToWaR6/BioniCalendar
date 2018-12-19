@@ -24,7 +24,7 @@ export class DatabaseProvider {
     this.sqlite.create(config)
         .then((db: SQLiteObject) => {
           this.database = db;
-          let sql = "CREATE TABLE IF NOT EXISTS `event` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `title` TEXT, `description` TEXT, `dateEvent` TEXT, `type` TEXT, `finish` BOOLEAN);";
+          let sql = "CREATE TABLE IF NOT EXISTS `event` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `title` TEXT, `description` TEXT, `dateEvent` TEXT, `type` TEXT, `picture` TEXT, `finish` BOOLEAN);";
           this.database.executeSql(sql,{} as any)
               .then(() => console.log("CREATION"))
               .catch(e => console.log("ERROR EXECUTE"));
@@ -32,10 +32,10 @@ export class DatabaseProvider {
         .catch(()=>console.log("ERROR CREATE"));
   }
 
-  addEvent(title: String, description: String, date: String, type: String, finish: boolean) {
+  addEvent(title: String, description: String, date: String, type: String, picture: String, finish: boolean) {
     return new Promise((resolve, reject) => {
-      let sql = "INSERT INTO `event` (title, description, dateEvent, type, finish) VALUES (?,?,?,?,?)";
-      this.database.executeSql(sql, [title, description, date, type, finish?1:0])
+      let sql = "INSERT INTO `event` (title, description, dateEvent, type, picture, finish) VALUES (?,?,?,?,?,?)";
+      this.database.executeSql(sql, [title, description, date, type, picture, finish?1:0])
         .then((data) => {
           resolve(data);
         }, (error) => {
@@ -57,7 +57,9 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
-                type:data.rows.item(i).type
+                type:data.rows.item(i).type,
+                picture:data.rows.item(i).picture,
+                finish:data.rows.item(i).finish
               });
             }
           }
@@ -81,7 +83,9 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
-                type:data.rows.item(i).type
+                type:data.rows.item(i).type,
+                picture:data.rows.item(i).picture,
+                finish:data.rows.item(i).finish
               });
             }
           }
@@ -105,7 +109,9 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
-                type:data.rows.item(i).type
+                type:data.rows.item(i).type,
+                picture:data.rows.item(i).picture,
+                finish:data.rows.item(i).finish
               });
             }
           }
@@ -129,7 +135,9 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
-                type:data.rows.item(i).type
+                type:data.rows.item(i).type,
+                picture:data.rows.item(i).picture,
+                finish:data.rows.item(i).finish
               });
             }
           }
