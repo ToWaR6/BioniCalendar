@@ -17,7 +17,6 @@ export class DatabaseProvider {
   }
 
   private connectToDb():void {
-    console.log("connection");
     let config: any = {
       name: 'data.db',
       location: 'default'
@@ -25,7 +24,7 @@ export class DatabaseProvider {
     this.sqlite.create(config)
         .then((db: SQLiteObject) => {
           this.database = db;
-          let sql = "CREATE TABLE IF NOT EXISTS `event` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `title` TEXT, `description` TEXT, `dateEvent` DATE, `type` TEXT, `finish` BOOLEAN);";
+          let sql = "CREATE TABLE IF NOT EXISTS `event` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `title` TEXT, `description` TEXT, `dateEvent` TEXT, `type` TEXT, `finish` BOOLEAN);";
           this.database.executeSql(sql,{} as any)
               .then(() => console.log("CREATION"))
               .catch(e => console.log("ERROR EXECUTE"));
@@ -33,10 +32,10 @@ export class DatabaseProvider {
         .catch(()=>console.log("ERROR CREATE"));
   }
 
-  addEvent(title: String, description: String, date: Date, type: String, finish: boolean) {
+  addEvent(title: String, description: String, date: String, type: String, finish: boolean) {
     return new Promise((resolve, reject) => {
       let sql = "INSERT INTO `event` (title, description, dateEvent, type, finish) VALUES (?,?,?,?,?)";
-      this.database.executeSql(sql, [title, description, date.toString(),type, finish?1:0])
+      this.database.executeSql(sql, [title, description, date, type, finish?1:0])
         .then((data) => {
           resolve(data);
         }, (error) => {
@@ -47,21 +46,106 @@ export class DatabaseProvider {
 
   getAllEvent() {
     return new Promise((resolve, reject) => {
-      let sql = "SELECT * FROM event";
+      let sql = "SELECT * FROM event ORDER BY dateEvent";
       this.database.executeSql(sql,{} as any)
         .then((data) => {
           let items = [];
           if (data.rows.length > 0) {
             for (let i=0; i<data.rows.length; i++) {
               items.push({
+                id:data.rows.item(i).id,
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
-                date:data.rows.item(i).date,
+                date:data.rows.item(i).dateEvent,
                 type:data.rows.item(i).type
               });
             }
           }
           resolve(items);
+        }, (error) => {
+          reject(error);
+        })
+    })
+  }
+
+  getEventByType(type: String) {
+    return new Promise((resolve, reject) => {
+      let sql = "SELECT * FROM event WHERE type=? ORDER BY dateEvent";
+      this.database.executeSql(sql, [type])
+        .then((data) => {
+          let items = [];
+          if (data.rows.length > 0) {
+            for (let i=0; i<data.rows.length; i++) {
+              items.push({
+                id:data.rows.item(i).id,
+                title:data.rows.item(i).title,
+                description:data.rows.item(i).description,
+                date:data.rows.item(i).dateEvent,
+                type:data.rows.item(i).type
+              });
+            }
+          }
+          resolve(items);
+        }, (error) => {
+          reject(error);
+        })
+    })
+  }
+
+  getEventByDate(date: String) {
+    return new Promise((resolve, reject) => {
+      let sql = "SELECT * FROM event WHERE dateEvent>=? ORDER BY dateEvent";
+      this.database.executeSql(sql, [date])
+        .then((data) => {
+          let items = [];
+          if (data.rows.length > 0) {
+            for (let i=0; i<data.rows.length; i++) {
+              items.push({
+                id:data.rows.item(i).id,
+                title:data.rows.item(i).title,
+                description:data.rows.item(i).description,
+                date:data.rows.item(i).dateEvent,
+                type:data.rows.item(i).type
+              });
+            }
+          }
+          resolve(items);
+        }, (error) => {
+          reject(error);
+        })
+    })
+  }
+
+  getEventByDateType(date: String, type: String) {
+    return new Promise((resolve, reject) => {
+      let sql = "SELECT * FROM event WHERE dateEvent>=? AND type=? ORDER BY dateEvent";
+      this.database.executeSql(sql, [date, type])
+        .then((data) => {
+          let items = [];
+          if (data.rows.length > 0) {
+            for (let i=0; i<data.rows.length; i++) {
+              items.push({
+                id:data.rows.item(i).id,
+                title:data.rows.item(i).title,
+                description:data.rows.item(i).description,
+                date:data.rows.item(i).dateEvent,
+                type:data.rows.item(i).type
+              });
+            }
+          }
+          resolve(items);
+        }, (error) => {
+          reject(error);
+        })
+    })
+  }
+
+  deleteEvent(id: String) {
+    return new Promise((resolve, reject) => {
+      let sql = "DELETE FROM event WHERE id=?";
+      this.database.executeSql(sql, [id])
+        .then((data) => {
+          resolve(data);
         }, (error) => {
           reject(error);
         })

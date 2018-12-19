@@ -22,7 +22,7 @@
 
     <ion-item>
       <ion-label>Start Time</ion-label>
-      <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="D/M/YYYY" min="2018" max="2050-10-31" [(ngModel)]="date" name="date" required></ion-datetime>
+      <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="DD/MM/YYYY" min="2018" max="2050" [(ngModel)]="date" name="date" required></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -40,9 +40,9 @@
     <ion-item>
         <ion-textarea type="text" id="description" placeholder="Description" [(ngModel)]="description" name="description"></ion-textarea>
     </ion-item>
-    
-    <button ion-button type="submit" block>Ajouter Evenement</button>
-
+    <div *ngIf="type && date && title">
+      <button ion-button type="submit" block>Ajouter Evenement</button>
+    </div>
   </form>
 
 

@@ -19,7 +19,7 @@ export class AddeventPage {
 
   title: String = "";
   description: String = "";
-  date: Date = null;
+  date: String = "";
   type: String = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private database: DatabaseProvider, private toastCtrl: ToastController) {
@@ -32,7 +32,7 @@ export class AddeventPage {
   addEvent() {
     this.database.addEvent(this.title, this.description, this.date, this.type, false)
       .then(() => {
-        this.presentToast("Evenement ajouté");
+        this.presentToast("Évènement ajouté");
         this.clearForm();
       });
   }
@@ -49,10 +49,6 @@ export class AddeventPage {
       message: msg,
       duration: 3000,
       position: 'top'
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
     });
 
     toast.present();

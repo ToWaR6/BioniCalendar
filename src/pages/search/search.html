@@ -18,23 +18,24 @@
 <form (ngSubmit)="searchEvent()">
   <ion-item>
     <ion-label>Start Time</ion-label>
-    <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="D/M/YYYY" min="2018" max="2050-10-31"></ion-datetime>
+    <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="DD/MM/YYYY" min="2018" max="2050" [(ngModel)]="date" name="date"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label>Type</ion-label>
-    <ion-select >
+    <ion-select [(ngModel)]="type" name="type">
       <ion-option value="Anniversaire">Anniversaire</ion-option>
       <ion-option value="Sport">Sport</ion-option>
       <ion-option value="Rendez-vous">Rendez-vous</ion-option>
       <ion-option value="Santé">Santé</ion-option>
       <ion-option value="Autres">Autres</ion-option>
+        <ion-option value="Aucun">Aucun</ion-option>
     </ion-select>
   </ion-item>
 
 
 
-  <button ion-button block>Rechercher</button>
+  <button ion-button type="submit" block>Rechercher</button>
 </form>
 
  <ion-list>

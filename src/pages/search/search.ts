@@ -9,9 +9,23 @@ import { DatabaseProvider } from './../../providers/database/database';
 export class EventDetailsPage {
   item;
 
-  constructor(params: NavParams) {
+  constructor(public navCtrl: NavController, public params: NavParams, public database: DatabaseProvider) {
     this.item = params.data.item;
+    this.item.date = new Date(this.item.date);
+    console.log(this.item.description);
   }
+
+  deleteEvent(id: String) {
+    this.database.deleteEvent(id).then((data: any) => {
+      console.log(data);
+    }, (error) => {
+      console.log(error);
+    })
+    this.navCtrl.push(SearchPage, {
+      delete: true
+    });
+  }
+
 }
 
 @IonicPage()
@@ -20,10 +34,11 @@ export class EventDetailsPage {
   templateUrl: 'search.html',
 })
 export class SearchPage {
-	items = [];
+  items = [];
+  date: String = "";
+  type: String = "";
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private database: DatabaseProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public database: DatabaseProvider) {
   }
 
   openNavDetailsPage(item) {
@@ -32,15 +47,49 @@ export class SearchPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
+    if (this.navParams.get("delete") == true) {
+      this.items = [];
+      this.clearForm();
+    }
+  }
+
+  clearForm() {
+    this.date = "";
+    this.type = "";
   }
 
   searchEvent() {
-    this.database.getAllEvent().then((data: any) => {
-      console.log(data);
-      this.items = data;
-    }, (error) => {
-      console.log(error);
-    })
+    this.items = []
+    if (this.date == "" && this.type == "") {
+      this.database.getAllEvent().then((data: any) => {
+        console.log(data);
+        this.items = data;
+      }, (error) => {
+        console.log(error);
+      })
+    } else if (this.date == "") {
+      this.database.getEventByType(this.type).then((data: any) => {
+        console.log(data);
+        this.items = data;
+      }, (error) => {
+        console.log(error);
+      })
+    } else if (this.type == "") {
+      this.database.getEventByDate(this.date).then((data: any) => {
+        console.log(data);
+        this.items = data;
+      }, (error) => {
+        console.log(error);
+      })
+    } else {
+        this.database.getEventByDateType(this.date, this.type).then((data: any) => {
+          console.log(data);
+          this.items = data;
+        }, (error) => {
+          console.log(error);
+        })
+    }
+    
+    this.clearForm();
   }
-
 }

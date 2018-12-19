@@ -7,8 +7,16 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-label> Date : {{ item.date }} </ion-label>
-  <ion-label> Type : {{ item.type }} </ion-label>
-  <ion-label> Description : </ion-label>
-  <ion-label autosize> {{ item.description }} </ion-label>
+  <ion-list>
+      <ion-item> <ion-label> Date : {{ item.date | date: "EEEE d MMMM yyyy" }} </ion-label> </ion-item>
+      <ion-item> <ion-label> Type : {{ item.type }} </ion-label> </ion-item>
+      <ion-item>
+        <ion-label> Description </ion-label>
+        <ion-label autosize> {{ item.description }} </ion-label>
+      </ion-item>
+  </ion-list>
+
+  <button ion-button round outline icon-end color="danger" position="bottom" (click)="deleteEvent(this.item.id)">
+  Supprimer la tâche <ion-icon name="trash"></ion-icon>
+  </button>
 </ion-content>
