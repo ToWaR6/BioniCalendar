@@ -17,6 +17,8 @@ import { SQLite } from '@ionic-native/sqlite';
 import { ToastController } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular'
+import { AppPreferences } from '@ionic-native/app-preferences';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { ActionSheetController } from 'ionic-angular'
     SQLite,
     ToastController,
     Camera,
-    ActionSheetController
+    ActionSheetController,
+    AppPreferences,
+    LocalNotifications
   ]
 })
 export class AppModule {}

@@ -21,8 +21,12 @@
       </ion-item>
 
     <ion-item>
-      <ion-label>Start Time</ion-label>
+      <ion-label floating>Date</ion-label>
       <ion-datetime displayFormat="DDDD D MMM YYYY" pickerFormat="DD/MM/YYYY" min="2018" max="2050" [(ngModel)]="date" name="date" required></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Heure</ion-label>
+      <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="heure" name="heure" required></ion-datetime>
     </ion-item>
 
     <ion-item>

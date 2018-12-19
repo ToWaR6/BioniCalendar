@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { ActionSheetController } from 'ionic-angular'
+import { ActionSheetController } from 'ionic-angular';
+import { AppPreferences } from '@ionic-native/app-preferences';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 /**
  * Generated class for the AddeventPage page.
@@ -19,13 +21,14 @@ import { ActionSheetController } from 'ionic-angular'
 })
 export class AddeventPage {
 
-  title: String = "";
-  description: String = "";
-  date: String = "";
-  type: String = "";
-  picture: any = null;
+  title: string = "";
+  description: string = "";
+  date: string = "";
+  heure: string = "";
+  type: string = "";
+  picture: string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public database: DatabaseProvider, public toastCtrl: ToastController, public camera: Camera, public actionSheetCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public database: DatabaseProvider, public toastCtrl: ToastController, public camera: Camera, public actionSheetCtrl: ActionSheetController, public appPreferences: AppPreferences, public localNotifications: LocalNotifications) {
   }
 
   ionViewDidLoad() {
@@ -33,11 +36,25 @@ export class AddeventPage {
   }
 
   addEvent() {
-    this.database.addEvent(this.title, this.description, this.date, this.type, this.picture, false)
+    this.database.addEvent(this.title, this.description, this.date, this.heure, this.type, this.picture, false)
       .then(() => {
         this.presentToast("Évènement ajouté");
         this.clearForm();
       });
+    let array: string[];
+    this.appPreferences.fetch("preference", "notification")
+      .then((data) => {
+        if (data.includes(this.type)) {
+          let date = new Date(this.date+" "+this.heure);
+          this.localNotifications.schedule({
+            title: this.title,
+            text: this.description,
+            trigger: {at: date},
+            led: '3d0029'
+          });
+        }
+      }
+    );
   }
 
   presentActionSheet() {
@@ -99,6 +116,7 @@ export class AddeventPage {
     this.title = "";
     this.description = "";
     this.date = "";
+    this.heure = "";
     this.type = "";
     this.picture = null;
   }

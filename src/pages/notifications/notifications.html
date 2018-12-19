@@ -14,11 +14,11 @@
 
 
 <ion-content padding>
+	<ion-label>Afficher les notifications des évènements de type :</ion-label>
 
 	<ion-list>
-
 	  <ion-item>
-	    <ion-label>Birthday</ion-label>
+	    <ion-label>Anniversaire</ion-label>
 	    <ion-checkbox [(ngModel)]="birthday"></ion-checkbox>
 	  </ion-item>
 
@@ -28,21 +28,26 @@
 	  </ion-item>
 
 	  <ion-item>
-	    <ion-label>Meeting</ion-label>
+	    <ion-label>Rendez-vous</ion-label>
 	    <ion-checkbox [(ngModel)]="meeting"></ion-checkbox>
 	  </ion-item>
 
 	  <ion-item>
-	    <ion-label>Health</ion-label>
+	    <ion-label>Santé</ion-label>
 	    <ion-checkbox [(ngModel)]="health"></ion-checkbox>
 	  </ion-item>
 
 	  <ion-item>
-	    <ion-label>Others</ion-label>
+	    <ion-label>Autres</ion-label>
 	    <ion-checkbox [(ngModel)]="others"></ion-checkbox>
 	  </ion-item>
 
+		<ion-item>
+	    <ion-label>Aucun</ion-label>
+	    <ion-checkbox [(ngModel)]="none"></ion-checkbox>
+	  </ion-item>
 	</ion-list>
 
+	<button ion-button type="button" position="center" (click)="saveNotif()">Sauvegarder</button>
 
 </ion-content>

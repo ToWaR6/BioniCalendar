@@ -9,6 +9,7 @@
 <ion-content padding>
   <ion-list>
       <ion-item> <ion-label> Date : {{ item.date | date: "EEEE d MMMM yyyy" }} </ion-label> </ion-item>
+      <ion-item> <ion-label> Heure : {{ item.heure }} </ion-label> </ion-item>
       <ion-item> <ion-label> Type : {{ item.type }} </ion-label> </ion-item>
       <ion-item *ngIf="item.description != ''">
         <ion-label> Description </ion-label>

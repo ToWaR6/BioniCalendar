@@ -24,7 +24,7 @@ export class DatabaseProvider {
     this.sqlite.create(config)
         .then((db: SQLiteObject) => {
           this.database = db;
-          let sql = "CREATE TABLE IF NOT EXISTS `event` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `title` TEXT, `description` TEXT, `dateEvent` TEXT, `type` TEXT, `picture` TEXT, `finish` BOOLEAN);";
+          let sql = "CREATE TABLE IF NOT EXISTS `event` (`id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `title` TEXT, `description` TEXT, `dateEvent` TEXT, `heure` TEXT, `type` TEXT, `picture` TEXT, `finish` BOOLEAN);";
           this.database.executeSql(sql,{} as any)
               .then(() => console.log("CREATION"))
               .catch(e => console.log("ERROR EXECUTE"));
@@ -32,10 +32,10 @@ export class DatabaseProvider {
         .catch(()=>console.log("ERROR CREATE"));
   }
 
-  addEvent(title: String, description: String, date: String, type: String, picture: String, finish: boolean) {
+  addEvent(title: string, description: string, date: string, heure: string, type: string, picture: string, finish: boolean) {
     return new Promise((resolve, reject) => {
-      let sql = "INSERT INTO `event` (title, description, dateEvent, type, picture, finish) VALUES (?,?,?,?,?,?)";
-      this.database.executeSql(sql, [title, description, date, type, picture, finish?1:0])
+      let sql = "INSERT INTO `event` (title, description, dateEvent, heure, type, picture, finish) VALUES (?,?,?,?,?,?,?)";
+      this.database.executeSql(sql, [title, description, date, heure, type, picture, finish?1:0])
         .then((data) => {
           resolve(data);
         }, (error) => {
@@ -57,6 +57,7 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
+                heure:data.rows.item(i).heure,
                 type:data.rows.item(i).type,
                 picture:data.rows.item(i).picture,
                 finish:data.rows.item(i).finish
@@ -70,7 +71,7 @@ export class DatabaseProvider {
     })
   }
 
-  getEventByType(type: String) {
+  getEventByType(type: string) {
     return new Promise((resolve, reject) => {
       let sql = "SELECT * FROM event WHERE type=? ORDER BY dateEvent";
       this.database.executeSql(sql, [type])
@@ -83,6 +84,7 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
+                heure:data.rows.item(i).heure,
                 type:data.rows.item(i).type,
                 picture:data.rows.item(i).picture,
                 finish:data.rows.item(i).finish
@@ -96,7 +98,7 @@ export class DatabaseProvider {
     })
   }
 
-  getEventByDate(date: String) {
+  getEventByDate(date: string) {
     return new Promise((resolve, reject) => {
       let sql = "SELECT * FROM event WHERE dateEvent>=? ORDER BY dateEvent";
       this.database.executeSql(sql, [date])
@@ -109,6 +111,7 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
+                heure:data.rows.item(i).heure,
                 type:data.rows.item(i).type,
                 picture:data.rows.item(i).picture,
                 finish:data.rows.item(i).finish
@@ -122,7 +125,7 @@ export class DatabaseProvider {
     })
   }
 
-  getEventByDateType(date: String, type: String) {
+  getEventByDateType(date: string, type: string) {
     return new Promise((resolve, reject) => {
       let sql = "SELECT * FROM event WHERE dateEvent>=? AND type=? ORDER BY dateEvent";
       this.database.executeSql(sql, [date, type])
@@ -135,6 +138,7 @@ export class DatabaseProvider {
                 title:data.rows.item(i).title,
                 description:data.rows.item(i).description,
                 date:data.rows.item(i).dateEvent,
+                heure:data.rows.item(i).heure,
                 type:data.rows.item(i).type,
                 picture:data.rows.item(i).picture,
                 finish:data.rows.item(i).finish
@@ -148,7 +152,7 @@ export class DatabaseProvider {
     })
   }
 
-  deleteEvent(id: String) {
+  deleteEvent(id: string) {
     return new Promise((resolve, reject) => {
       let sql = "DELETE FROM event WHERE id=?";
       this.database.executeSql(sql, [id])

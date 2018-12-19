@@ -14,7 +14,7 @@ export class EventDetailsPage {
     this.item.date = new Date(this.item.date);
   }
 
-  deleteEvent(id: String) {
+  deleteEvent(id: string) {
     this.database.deleteEvent(id).then((data: any) => {
       console.log(data);
     }, (error) => {
@@ -34,8 +34,8 @@ export class EventDetailsPage {
 })
 export class SearchPage {
   items = [];
-  date: String = "";
-  type: String = "";
+  date: string = "";
+  type: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public database: DatabaseProvider) {
   }

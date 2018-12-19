@@ -83,7 +83,9 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <allow-navigation href="http://192.168.0.12:8100" sessionid="b8d7d599" />
-    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
+    <plugin name="cordova-plugin-app-preferences" spec="0.99.3" />
+    <plugin name="cordova-plugin-local-notification" spec="0.9.0-beta.2" />
     <plugin name="cordova-sqlite-storage" spec="^2.5.2" />
+    <engine name="android" spec="6.3.0" />
 </widget>
