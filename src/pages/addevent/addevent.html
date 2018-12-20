@@ -30,7 +30,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>Type</ion-label>
+      <ion-label floating>Type</ion-label>
       <ion-select [(ngModel)]="type" name="type" required>
         <ion-option value="Anniversaire">Anniversaire</ion-option>
         <ion-option value="Sport">Sport</ion-option>
@@ -41,7 +41,8 @@
       </ion-select>
     </ion-item>
     <ion-item>
-        <ion-textarea type="text" id="description" placeholder="Description" [(ngModel)]="description" name="description"></ion-textarea>
+        <ion-label floating>Description</ion-label>
+        <ion-textarea type="text" id="description" [(ngModel)]="description" name="description"></ion-textarea>
     </ion-item>
     <ion-item> <button ion-button type="button" position="center" (click)="presentActionSheet()" icon-end>Ajouter une photo<ion-icon name="camera"></ion-icon></button>
     <p align="center"><img src="{{picture}}"></p>

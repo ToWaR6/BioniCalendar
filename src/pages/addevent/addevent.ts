@@ -41,7 +41,6 @@ export class AddeventPage {
         this.presentToast("Évènement ajouté");
         this.clearForm();
       });
-    let array: string[];
     this.appPreferences.fetch("preference", "notification")
       .then((data) => {
         if (data.includes(this.type)) {

@@ -19,18 +19,42 @@ import { ToastController } from 'ionic-angular';
 })
 export class NotificationsPage {
 
-	birthday: boolean;
-	sport: boolean;
-  meeting: boolean;
-  health: boolean;
-  others: boolean;
-  none: boolean;
+	birthday: boolean = false;
+	sport: boolean = false;
+  meeting: boolean = false;
+  health: boolean = false;
+  others: boolean = false;
+  none: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public appPreferences: AppPreferences, public database: DatabaseProvider, public localNotifications: LocalNotifications, public toastCtrl: ToastController) {
+    this.setTypeFromPreference();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NotificationsPage');
+  }
+
+  setTypeFromPreference() {
+    this.appPreferences.fetch("preference", "notification").then((data) => {
+      if (data.includes("Anniversaire")) {
+        this.birthday = true;
+      }
+      if (data.includes("Sport")) {
+        this.sport = true;
+      }
+      if (data.includes("Rendez-vous")) {
+        this.meeting = true;
+      }
+      if (data.includes("Santé")) {
+        this.health = true;
+      }
+      if (data.includes("Autres")) {
+        this.others = true;
+      }
+      if (data.includes("Aucun")) {
+        this.none = true;
+      }
+    })
   }
 
   saveNotif() {
