@@ -22,4 +22,4 @@ BioniCalendar propose les fonctionnalités suivantes :
 
 ### Notifications
 
-Sur l'onglet "Notifications", l'utilisateur pourra choisir les types évènements dont il veut être notifié. Ces choix sont gardés dans les préférences de l’application ce qui permet de les retrouver lors d’une future utilisation.
+* Sur l'onglet "Notifications", l'utilisateur pourra choisir les types évènements dont il veut être notifié. Ces choix sont gardés dans les préférences de l’application ce qui permet de les retrouver lors d’une future utilisation.
